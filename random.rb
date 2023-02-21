@@ -2,7 +2,7 @@ class Group_split
   attr_accessor :arr
 
   def initialize(arr)
-    @arr = arr
+    self.arr = arr
   end
 
   def show_first_group
