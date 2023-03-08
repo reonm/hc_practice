@@ -34,6 +34,6 @@ wday = firstday_wday - 1
 (1..lastday_date).each do |date|    # 1~最終日まで繰り返し
   print "#{date.to_s.rjust(2)} "    # 日付を右寄せで表示
   wday += 1
-  print "\n" if (wday % 7).zero? # 土曜日まで表示したら改行
+  print "\n" if (wday % 7).zero? # 土曜日まで表示したら改行する
 end
 print "\n" if wday % 7 != 0
