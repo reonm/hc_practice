@@ -15,3 +15,14 @@ menus.each do |menu|
   index += 1
   puts "#{index}. " + menu.info
 end
+
+order = gets.chomp.to_i
+@selected_menu = menus[order - 1]
+# puts "商品代金"
+puts "#{@selected_menu.price}"
+
+machine = Machine.new(@selected_menu)
+machine.purchase
+machine.get_earings(@selected_menu)
+machine.user_balance(suica1, @selected_menu)
+machine.get_stock(@selected_menu)
