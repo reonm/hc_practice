@@ -12,4 +12,12 @@ class Suica
     #  "合計金額"
     @balance
   end
+
+  def recharge(input_recharge)
+    @balance += input_recharge
+  end
+
+  def show_recharged_balance
+    puts @balance
+  end
 end
