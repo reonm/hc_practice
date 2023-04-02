@@ -14,10 +14,10 @@ class Machine
     p @drinks.stock = @drinks.stock - 1
   end
 
-  def get_stock(menu)
+  def get_stock(menu, input_stock)
     # "補充したい在庫数"
-    input = gets.chomp.to_i
-    p menu.stock = menu.stock + input
+    puts '在庫数'
+    p menu.stock = menu.stock + input_stock
   end
 
   def get_earings(drink)
@@ -31,7 +31,7 @@ class Machine
     raise StandardError if suica.balance < drink.price
 
     # puts "チャージ残高"
-    p suica.balance = suica.balance - drink.price
+    return suica.balance = suica.balance - drink.price
     @suica_balance = suica.balance
   end
 end
