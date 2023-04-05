@@ -1,5 +1,5 @@
 class Suica
-  attr_accessor :balance
+  attr_reader :balance
 
   def initialize(balance)
     init_balance = 500
