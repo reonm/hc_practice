@@ -4,9 +4,9 @@ require_relative 'machine'
 
 puts 'チャージしたい金額を入力してください'
 input = gets.chomp.to_i
-suica1 = Suica.new(input)
+suica = Suica.new(input)
 puts '残高'
-p suica1.show_balance
+p suica.show_balance
 
 pepsi = Juice.new(name: 'pepsi', price: 150, stock: 5)
 monster = Juice.new(name: 'monster', price: 230, stock: 5)
@@ -46,40 +46,41 @@ loop do
     puts '商品代金'
     p "#{@selected_menu.price}"
     puts "\n                     "
+    suica.purchared_balance(@selected_menu.price)
     p @total_stock = @selected_menu.stock - 1
-    raise StandardError if @selected_menu.stock < 1
-
-    menu.insufficient_funds(suica1, @selected_menu)
+    machine.purchase(@selected_menu.stock)
+    machine.get_earings(@selected_menu)
+    machine.buy(suica)
 
   when 2
     puts "\n                     "
     puts 'チャージしたい金額を入力してください'
     input3 = gets.chomp.to_i
-    suica1.recharge(input3)
+    suica.recharge(input3)
     puts "\n                     "
     puts '残高'
-    suica1.show_recharged_balance
+    suica.show_recharged_balance
     puts "\n                     "
   when 3
     puts "\n                     "
     puts '現在の残高'
-    puts machine.user_balance(suica1, @selected_menu)
+    suica.user_balance
     puts "\n                     "
   when 4
     puts "\n                     "
     puts '現在の売り上げ'
-    machine.get_earings(@selected_menu)
+    machine.show_earings
     puts "\n                     "
   when 5
     puts "\n                     "
     puts "#{@selected_menu.name}の残りの在庫数"
-    machine.purchase(@selected_menu.stock)
+    machine.stock_check
   when 6
     puts "\n                     "
     puts '補充したい在庫数を入力してください'
     input2 = gets.chomp.to_i
     puts "\n                     "
-    machine.get_stock(@total_stock, input2)
+    machine.get_stock(input2,@selected_menu.name)
     puts "\n                     "
   end
 end

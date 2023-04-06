@@ -12,7 +12,7 @@ class Juice
     "#{@name} #{@price}円"
   end
 
-  def insufficient_funds(suica, drink)
-    raise StandardError if suica.balance < drink.price
-  end
+  # def insufficient_funds(suica, drink)
+  #   raise StandardError if suica.balance < drink.price
+  # end
 end
