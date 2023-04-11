@@ -5,14 +5,21 @@ class Juice
     @name = name
     @price = price
     @stock = stock
-    @total_stock = 0
   end
 
   def info
     "#{@name} #{@price}円"
   end
 
-  # def insufficient_funds(suica, drink)
-  #   raise StandardError if suica.balance < drink.price
-  # end
+  def reduce_stock
+    @stock -= 1
+  end
+
+  def increase_stock(input_stock, _drink)
+    @stock += input_stock
+    puts "\n                     "
+    puts "#{@name}の在庫数"
+    puts "\n                     "
+    p @stock
+  end
 end

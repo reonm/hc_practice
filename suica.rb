@@ -6,14 +6,12 @@ class Suica
     raise StandardError if balance < 100
 
     @balance = balance + init_balance
-
   end
 
   def show_balance
-    #  "合計金額"
     @balance
   end
-  
+
   def purchared_balance(drink)
     @balance -= drink
   end

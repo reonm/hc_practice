@@ -1,14 +1,13 @@
 class Machine
-  attr_reader :earings, :total_balance
-@@earings = 0
-  def initialize(_menu1, _menu2, _menu3)
-    @total_balance
-  end
+  attr_reader :earings, :total_stock
+
+  @@earings = 0
+
+  def initialize(drink1, drink2, drink3); end
 
   def get_earings(drink)
     # "売上金額"
     @@earings += drink.price
-    p @@earings
   end
 
   def show_earings
@@ -16,23 +15,18 @@ class Machine
   end
 
   def purchase(drink)
-    raise StandardError if drink < 1
+    raise StandardError if drink.stock < 1
 
-    @total_stock = drink - 1
-    # "残りの在庫数"
+    drink.reduce_stock
   end
 
-  def stock_check
-    puts @total_stock
-  end
-
-  def get_stock(input_stock, name)
-    # "補充したい在庫数"
-
-    puts "#{name}の残りの在庫数"
-
-    @total_stock += input_stock
-    p @total_stock
+  def stock_check(pepsi, monster, irohasu)
+    puts "#{pepsi.name}  在庫数  #{pepsi.stock}個"
+    puts "\n                     "
+    puts "#{monster.name}  在庫数  #{monster.stock}個"
+    puts "\n                     "
+    puts "#{irohasu.name}  在庫数  #{irohasu.stock}個"
+    puts "\n                     "
   end
 
   def buy(suica)

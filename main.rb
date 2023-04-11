@@ -11,8 +11,10 @@ p suica.show_balance
 pepsi = Juice.new(name: 'pepsi', price: 150, stock: 5)
 monster = Juice.new(name: 'monster', price: 230, stock: 5)
 irohasu = Juice.new(name: 'irohasu', price: 120, stock: 5)
+juices = [pepsi, monster, irohasu]
+index = 0
 
-machine = Machine.new(pepsi, monster, irohasu)
+machine = Machine.new(pepsi, monster, juices)
 first_menu1 = 'ジュースを購入する'
 first_menu2 = 'Suicaにチャージをする'
 first_menu3 = '残高を確認する'
@@ -34,29 +36,30 @@ loop do
 
   case choice
   when 1
-    juices = [pepsi, monster, irohasu]
     index = 0
     juices.each do |menu|
       index += 1
       puts "#{index}. " + menu.info
     end
     order = gets.chomp.to_i
-    @selected_menu = juices[order - 1]
+    selected_juice = juices[order - 1]
+
     puts "\n                     "
     puts '商品代金'
-    p "#{@selected_menu.price}"
+    p "#{selected_juice.price}"
     puts "\n                     "
-    suica.purchared_balance(@selected_menu.price)
-    p @total_stock = @selected_menu.stock - 1
-    machine.purchase(@selected_menu.stock)
-    machine.get_earings(@selected_menu)
+    suica.purchared_balance(selected_juice.price)
+    puts "\n                     "
+
+    machine.purchase(selected_juice)
+    machine.get_earings(selected_juice)
     machine.buy(suica)
 
   when 2
     puts "\n                     "
     puts 'チャージしたい金額を入力してください'
-    input3 = gets.chomp.to_i
-    suica.recharge(input3)
+    input2 = gets.chomp.to_i
+    suica.recharge(input2)
     puts "\n                     "
     puts '残高'
     suica.show_recharged_balance
@@ -73,14 +76,24 @@ loop do
     puts "\n                     "
   when 5
     puts "\n                     "
-    puts "#{@selected_menu.name}の残りの在庫数"
-    machine.stock_check
+    machine.stock_check(pepsi, monster, irohasu)
   when 6
     puts "\n                     "
+    puts '補充したいジュースの番号を選んでください'
+    current_stock = [pepsi, monster, irohasu]
+    index = 0
+    current_stock.each do |menu|
+      index += 1
+      puts "#{index}. #{menu.name} #{menu.stock}個"
+      puts "\n                     "
+    end
+    number = gets.chomp.to_i
+    juices_quantity = current_stock[number - 1]
     puts '補充したい在庫数を入力してください'
-    input2 = gets.chomp.to_i
     puts "\n                     "
-    machine.get_stock(input2,@selected_menu.name)
+    input3 = gets.chomp.to_i
+    puts "\n                     "
+    juices_quantity.increase_stock(input3, juices_quantity)
     puts "\n                     "
   end
 end
