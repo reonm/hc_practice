@@ -1,5 +1,6 @@
 [emails]
   *id {label: "bigint, not null"}
+  user_id {label: "bigint, not null, FK(users)"}
   email {label: "varchar, not null, uniq" }
 [users]
   *id {label: "bigint, not null"}
@@ -69,18 +70,17 @@
 # 0 or more      *
 # 1 or more      +
 users 1--1 `emails`
-emails 1--1 `tweets`
 users 1--* `tweets`
 users 1--* `likes`
-tweets 1--* `likes`
 users 1--* `retweets`
-tweets 1--* `retweets`
 users 1--* `follows`
 users 1--* `bookmarks`
-tweets 1--* `bookmarks`
-users 1--* `bookmarks`
 users 1--* `direct_messages`
-follows 1--* `direct_messages`
 users 1--* `notifications`
-likes 1--* `notifications`
+tweets 1--* `likes`
+tweets 1--* `retweets`
+tweets 1--* `bookmarks`
+follows 1--* `direct_messages`
 follows 1--* `notifications`
+likes 1--* `notifications`
+
